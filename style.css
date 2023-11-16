@@ -176,6 +176,7 @@ button:hover{
 .text h1{
     font-size: 20px;
     margin-top: 10px;
+    color: black;
 }
 
 .text span{
@@ -186,6 +187,7 @@ button:hover{
     margin-top: 10px;
     font-size: 15px;
     font-weight: 300;
+    color: black;
 }
 
 
