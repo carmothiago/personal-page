@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <link href="data:image/x-icon;base64,AAABAAEAEBAQAAEABAAoAQAAFgAAACgAAAAQAAAAIAAAAAEABAAAAAAAgAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAA9wD/AAcICAAAhP8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADMzIiIzMwAAMzIzMyMzAAAzMzEzMzMAADMjMzMyMwAAMzMzMzMzAAAzMzMzMzMAADMwAAADMwAAAwAAAAAwAAAAAAAAAAAAACIgAiIAAgAAIAICAAAiIAAgAgIiACAgACACAgACICIAIAICAAIAAgAiIAIiAgACAAAAAAAAAADAAwAAwAMAAMADAADAAwAAwAMAAMADAADH4wAA7/cAAP//AADGOwAA2vEAANo1AADa5AAA2u4AAMYuAAD//wAA" rel="icon" type="image/x-icon">
+    <title>Galeria de Fotos</title>
+</head>
+<body>
+
+    <header>
+        <div class="logo">
+            <i class="fa-solid fa-code"></i>
+        </div>
+        <div class="cabeçalho-link">
+            <li>
+                <a href="index.html">Home</a>
+            </li>
+            <!--<li>
+                <a href="#">About</a>
+            </li>-->
+            <li>
+                <a href="galeria.html">Projects</a>
+            </li>
+            <a href="contact.html"><button>My contact</button></a>
+        </div>
+        
+    </header>
+
+<div class="gallery">
+    <div class="thumbnail" onclick="openModal();currentSlide(1)">
+        <img src="image/img1.png" alt="Image 1">
+    </div>
+    <div class="thumbnail" onclick="openModal();currentSlide(2)">
+        <img src="image/img2.png" alt="Image 2">
+    </div>
+    <div class="thumbnail" onclick="openModal();currentSlide(3)">
+        <img src="image/img3.png" alt="Image 3">
+    </div>
+    <div class="thumbnail" onclick="openModal();currentSlide(4)">
+        <img src="image/img4.png" alt="Image 4">
+    </div>
+    <div class="thumbnail" onclick="openModal();currentSlide(5)">
+        <img src="image/img5.png" alt="Image 5">
+    </div>
+    <div class="thumbnail" onclick="openModal();currentSlide(6)">
+        <img src="image/img6.png" alt="Image 6">
+    </div>
+    <div class="thumbnail" onclick="openModal();currentSlide(7)">
+        <img src="image/img7.png" alt="Image 7">
+    </div>
+    <!-- Adicione mais miniaturas conforme necessário -->
+</div>
+
+<div id="myModal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <div class="mySlides">
+            <img src="image/img1.png" alt="Image 1">
+        </div>
+        <div class="mySlides">
+            <img src="image/img2.png" alt="Image 2">
+        </div>
+        <div class="mySlides">
+            <img src="image/img3.png" alt="Image 3">
+        </div>
+        <div class="mySlides">
+            <img src="image/img4.png" alt="Image 4">
+        </div>
+        <div class="mySlides">
+            <img src="image/img5.png" alt="Image 5">
+        </div>
+        <div class="mySlides">
+            <img src="image/img6.png" alt="Image 6">
+        </div>
+        <div class="mySlides">
+            <img src="image/img7.png" alt="Image 7">
+        </div>
+        <!-- Adicione mais slides conforme necessário -->
+    </div>
+</div>
+
+<script>
+    let slideIndex = 1;
+
+    function openModal() {
+        document.getElementById('myModal').style.display = 'flex';
+    }
+
+    function closeModal() {
+        document.getElementById('myModal').style.display = 'none';
+    }
+
+    function showSlides(n) {
+        let i;
+        let slides = document.getElementsByClassName('mySlides');
+        if (n > slides.length) {
+            slideIndex = 1;
+        }
+        if (n < 1) {
+            slideIndex = slides.length;
+        }
+        for (i = 0; i < slides.length; i++) {
+            slides[i].style.display = 'none';
+        }
+        slides[slideIndex - 1].style.display = 'block';
+    }
+
+    function currentSlide(n) {
+        showSlides(slideIndex = n);
+    }
+
+    showSlides(slideIndex);
+</script>
+
+</body>
+</html>
