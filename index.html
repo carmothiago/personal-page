@@ -1,316 +1,724 @@
-<!DOCTYPE HTML>
-<html>
-
+<!DOCTYPE html>
+<html lang="pt-BR">
 <head>
-    <title>Thiago Carmo</title>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-    <link rel="stylesheet" href="assets/css/main.css" />
-    <noscript>
-        <link rel="stylesheet" href="assets/css/noscript.css" />
-    </noscript>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Thiago Silva Carmo — Analista de Infraestrutura de TI</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  /* ============================================================
+     TOKENS
+     ============================================================ */
+  :root{
+    --bg:        #0E1420;
+    --bg-grid:   #121A29;
+    --panel:     #161D2B;
+    --panel-alt: #1B2334;
+    --border:    #29314880;
+    --border-solid: #29314880;
+    --text:      #E7EAF0;
+    --text-dim:  #8A93A6;
+    --text-faint:#5B6376;
+    --amber:     #FFB454;
+    --teal:      #4FD8C9;
+    --red:       #FF6E6E;
+
+    --font-display: 'Space Grotesk', sans-serif;
+    --font-body:    'Inter', sans-serif;
+    --font-mono:    'JetBrains Mono', monospace;
+
+    --radius: 6px;
+    --maxw: 1040px;
+  }
+
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:
+      linear-gradient(var(--bg-grid) 1px, transparent 1px) 0 0/100% 44px,
+      linear-gradient(90deg, var(--bg-grid) 1px, transparent 1px) 0 0/44px 100%,
+      var(--bg);
+    color:var(--text);
+    font-family:var(--font-body);
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  ::selection{ background:var(--amber); color:#0E1420; }
+  a{ color:inherit; }
+  img{ max-width:100%; display:block; }
+
+  .wrap{ max-width:var(--maxw); margin:0 auto; padding:0 24px; }
+
+  h1,h2,h3{ font-family:var(--font-display); font-weight:600; letter-spacing:-0.01em; }
+  .mono{ font-family:var(--font-mono); }
+
+  .eyebrow{
+    font-family:var(--font-mono);
+    font-size:12px;
+    letter-spacing:.14em;
+    text-transform:uppercase;
+    color:var(--teal);
+    display:flex; align-items:center; gap:8px;
+    margin-bottom:14px;
+  }
+  .dot{
+    width:7px; height:7px; border-radius:50%;
+    background:var(--teal);
+    box-shadow:0 0 0 0 rgba(79,216,201,.6);
+    animation:pulse 2s infinite;
+    flex-shrink:0;
+  }
+  .dot.amber{ background:var(--amber); box-shadow:0 0 0 0 rgba(255,180,84,.6); }
+  @keyframes pulse{
+    0%{ box-shadow:0 0 0 0 rgba(79,216,201,.45); }
+    70%{ box-shadow:0 0 0 8px rgba(79,216,201,0); }
+    100%{ box-shadow:0 0 0 0 rgba(79,216,201,0); }
+  }
+  @media (prefers-reduced-motion: reduce){
+    .dot{ animation:none; }
+    html{ scroll-behavior:auto; }
+  }
+
+  section{ padding:88px 0; border-bottom:1px solid var(--border-solid); }
+  section:last-of-type{ border-bottom:none; }
+
+  .section-head{ margin-bottom:44px; max-width:640px; }
+  .section-head .index{ color:var(--text-faint); font-family:var(--font-mono); font-size:13px; }
+  .section-head h2{ font-size:30px; margin-top:8px; }
+  .section-head p{ color:var(--text-dim); margin-top:10px; font-size:15px; }
+
+  /* ============================================================
+     NAV
+     ============================================================ */
+  nav{
+    position:sticky; top:0; z-index:50;
+    background:rgba(14,20,32,.86);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--border-solid);
+  }
+  nav .wrap{
+    display:flex; align-items:center; justify-content:space-between;
+    height:60px;
+  }
+  nav .brand{
+    font-family:var(--font-mono); font-size:14px; color:var(--text);
+    display:flex; align-items:center; gap:8px;
+  }
+  nav .brand .dot{ background:var(--teal); }
+  nav ul{
+    list-style:none; display:flex; gap:28px;
+  }
+  nav a{
+    text-decoration:none; color:var(--text-dim); font-size:13px;
+    font-family:var(--font-mono);
+    transition:color .15s ease;
+  }
+  nav a:hover, nav a:focus-visible{ color:var(--amber); }
+  nav ul{ display:none; }
+  @media (min-width:720px){ nav ul{ display:flex; } }
+
+  /* ============================================================
+     HERO
+     ============================================================ */
+  .hero{
+    padding:72px 0 96px;
+    border-bottom:1px solid var(--border-solid);
+  }
+  .hero-grid{
+    display:grid;
+    grid-template-columns:1fr;
+    gap:40px;
+    align-items:start;
+  }
+  @media (min-width:860px){
+    .hero-grid{ grid-template-columns:1.4fr 1fr; }
+  }
+  .hero h1{ font-size:44px; line-height:1.05; }
+  @media (min-width:640px){ .hero h1{ font-size:58px; } }
+  .hero .role{
+    font-family:var(--font-mono); color:var(--amber); font-size:15px;
+    margin-top:14px;
+  }
+  .hero p.lede{
+    margin-top:20px; color:var(--text-dim); font-size:16px; max-width:52ch;
+  }
+  .cta-row{ display:flex; flex-wrap:wrap; gap:12px; margin-top:32px; }
+  .btn{
+    font-family:var(--font-mono); font-size:13px;
+    padding:11px 18px; border-radius:var(--radius);
+    border:1px solid var(--border-solid);
+    text-decoration:none; color:var(--text);
+    transition:border-color .15s ease, transform .15s ease, background .15s ease;
+    display:inline-flex; align-items:center; gap:8px;
+  }
+  .btn:hover{ border-color:var(--amber); transform:translateY(-1px); }
+  .btn.primary{ background:var(--amber); color:#101521; border-color:var(--amber); font-weight:600; }
+  .btn.primary:hover{ background:#ffc678; }
+
+  /* status / uptime panel */
+  .panel{
+    background:var(--panel);
+    border:1px solid var(--border-solid);
+    border-radius:var(--radius);
+    overflow:hidden;
+  }
+  .panel-head{
+    display:flex; align-items:center; gap:8px;
+    padding:12px 16px; border-bottom:1px solid var(--border-solid);
+    font-family:var(--font-mono); font-size:12px; color:var(--text-dim);
+  }
+  .panel-head .traffic{ display:flex; gap:6px; margin-right:8px; }
+  .traffic span{ width:9px; height:9px; border-radius:50%; display:block; }
+  .traffic span:nth-child(1){ background:#FF6E6E; }
+  .traffic span:nth-child(2){ background:#FFB454; }
+  .traffic span:nth-child(3){ background:#4FD8C9; }
+
+  .status-panel .body{ padding:20px 18px 22px; }
+  .status-row{
+    display:flex; justify-content:space-between; align-items:center;
+    padding:9px 0; border-bottom:1px dashed var(--border-solid);
+    font-family:var(--font-mono); font-size:13px;
+  }
+  .status-row:last-child{ border-bottom:none; }
+  .status-row .k{ color:var(--text-dim); }
+  .status-row .v{ color:var(--text); }
+  .status-row .v.ok{ color:var(--teal); }
+  #uptime{ font-variant-numeric:tabular-nums; letter-spacing:.02em; }
+
+  /* photo / operator badge */
+  .photo-frame{
+    margin-top:18px;
+    border:1px dashed var(--border-solid);
+    border-radius:var(--radius);
+    padding:14px;
+    display:flex; gap:14px; align-items:center;
+  }
+  .photo-slot{
+    width:64px; height:64px; border-radius:var(--radius);
+    background:
+      radial-gradient(circle at 30% 20%, #2b3550, transparent 60%),
+      linear-gradient(135deg, var(--panel-alt), #10141f);
+    border:1px solid var(--border-solid);
+    display:flex; align-items:center; justify-content:center;
+    color:var(--text-faint); font-family:var(--font-mono); font-size:10px;
+    flex-shrink:0; overflow:hidden; text-align:center;
+  }
+  .photo-slot img{ width:100%; height:100%; object-fit:cover; }
+  .photo-meta{ font-family:var(--font-mono); font-size:11px; color:var(--text-dim); line-height:1.5; }
+  .photo-meta b{ color:var(--text); display:block; font-size:12px; }
+
+  /* ============================================================
+     EXPERIÊNCIA — estilo log
+     ============================================================ */
+  .log{ position:relative; padding-left:26px; }
+  .log::before{
+    content:''; position:absolute; left:5px; top:6px; bottom:6px;
+    width:1px; background:linear-gradient(var(--border-solid), var(--border-solid));
+  }
+  .log-entry{ position:relative; padding-bottom:36px; }
+  .log-entry:last-child{ padding-bottom:0; }
+  .log-entry::before{
+    content:''; position:absolute; left:-26px; top:6px;
+    width:11px; height:11px; border-radius:50%;
+    background:var(--bg); border:2px solid var(--teal);
+  }
+  .log-entry.current::before{ border-color:var(--amber); box-shadow:0 0 0 4px rgba(255,180,84,.14); }
+  .log-time{
+    font-family:var(--font-mono); font-size:12px; color:var(--amber);
+    display:flex; align-items:center; gap:8px; flex-wrap:wrap;
+  }
+  .badge{
+    font-family:var(--font-mono); font-size:10px; letter-spacing:.06em;
+    color:var(--teal); border:1px solid var(--border-solid);
+    padding:2px 7px; border-radius:100px; text-transform:uppercase;
+  }
+  .log-entry h3{ font-size:19px; margin-top:8px; }
+  .log-entry .company{ color:var(--text-dim); font-size:13px; font-family:var(--font-mono); margin-top:2px; }
+  .log-entry ul{ margin-top:12px; padding-left:18px; color:var(--text-dim); font-size:14.5px; }
+  .log-entry li{ margin-top:5px; }
+  .log-entry li::marker{ color:var(--teal); }
+
+  /* ============================================================
+     HABILIDADES — services
+     ============================================================ */
+  .services-grid{
+    display:grid; gap:20px;
+    grid-template-columns:1fr;
+  }
+  @media (min-width:720px){ .services-grid{ grid-template-columns:repeat(3,1fr); } }
+  .service-card{
+    background:var(--panel); border:1px solid var(--border-solid);
+    border-radius:var(--radius); padding:20px;
+  }
+  .service-card h3{
+    font-family:var(--font-mono); font-size:12.5px; letter-spacing:.06em;
+    text-transform:uppercase; color:var(--text-dim); margin-bottom:14px;
+    display:flex; align-items:center; gap:8px;
+  }
+  .skill-list{ list-style:none; display:flex; flex-direction:column; gap:10px; }
+  .skill-list li{
+    display:flex; align-items:center; gap:9px;
+    font-family:var(--font-mono); font-size:13.5px;
+  }
+  .skill-list .stat{ color:var(--text-faint); margin-left:auto; font-size:11px; }
+
+  /* ============================================================
+     FORMAÇÃO
+     ============================================================ */
+  .edu-grid{ display:grid; gap:16px; grid-template-columns:1fr; }
+  @media (min-width:720px){ .edu-grid{ grid-template-columns:1fr 1fr; } }
+  .edu-card{
+    background:var(--panel-alt); border:1px solid var(--border-solid);
+    border-radius:var(--radius); padding:20px 22px;
+  }
+  .edu-card .tag{ font-family:var(--font-mono); font-size:11px; color:var(--amber); text-transform:uppercase; letter-spacing:.06em; }
+  .edu-card h3{ font-size:18px; margin-top:8px; }
+  .edu-card p{ color:var(--text-dim); font-size:13.5px; margin-top:4px; }
+
+  /* ============================================================
+     PROJETOS — repositórios
+     ============================================================ */
+  .repo-grid{ display:grid; gap:20px; grid-template-columns:1fr; }
+  @media (min-width:760px){ .repo-grid{ grid-template-columns:1fr 1fr; } }
+
+  .repo-card{
+    background:var(--panel); border:1px solid var(--border-solid);
+    border-radius:var(--radius); overflow:hidden;
+    display:flex; flex-direction:column;
+  }
+  .repo-image{
+    aspect-ratio:16/9; width:100%; background:var(--panel-alt);
+    display:flex; align-items:center; justify-content:center;
+    color:var(--text-faint); font-family:var(--font-mono); font-size:12px;
+    border-bottom:1px solid var(--border-solid); overflow:hidden; text-align:center; padding:12px;
+  }
+  .repo-image img{ width:100%; height:100%; object-fit:cover; }
+  .repo-body{ padding:18px 20px 20px; display:flex; flex-direction:column; gap:10px; flex:1; }
+  .repo-title-row{ display:flex; justify-content:space-between; align-items:baseline; gap:10px; }
+  .repo-title-row h3{ font-size:17px; }
+  .repo-title-row .repo-link{ font-family:var(--font-mono); font-size:11px; color:var(--teal); text-decoration:none; white-space:nowrap; }
+  .repo-desc{ color:var(--text-dim); font-size:13.5px; }
+  .tag-row{ display:flex; flex-wrap:wrap; gap:6px; }
+  .tag-row span{
+    font-family:var(--font-mono); font-size:10.5px; color:var(--text-dim);
+    border:1px solid var(--border-solid); padding:3px 8px; border-radius:100px;
+  }
+  .repo-code{
+    background:#0B0F18; border:1px solid var(--border-solid); border-radius:4px;
+    padding:12px 14px; font-family:var(--font-mono); font-size:12px; color:#B7E7DE;
+    overflow-x:auto; white-space:pre;
+  }
+  .repo-code .cmt{ color:var(--text-faint); }
+  .repo-code .kw{ color:var(--amber); }
+
+  .repo-card.placeholder{
+    border-style:dashed; align-items:center; justify-content:center;
+    display:flex; text-align:center; min-height:280px;
+  }
+  .repo-card.placeholder .inner{ padding:32px; }
+  .repo-card.placeholder .plus{
+    font-family:var(--font-mono); font-size:26px; color:var(--text-faint);
+    border:1px dashed var(--border-solid); width:44px; height:44px; border-radius:50%;
+    display:flex; align-items:center; justify-content:center; margin:0 auto 14px;
+  }
+  .repo-card.placeholder p{ color:var(--text-faint); font-family:var(--font-mono); font-size:12.5px; max-width:26ch; margin:0 auto; }
+
+  /* ============================================================
+     CONTATO
+     ============================================================ */
+  .contact-grid{
+    display:grid; gap:14px; grid-template-columns:1fr;
+  }
+  @media (min-width:640px){ .contact-grid{ grid-template-columns:repeat(2,1fr); } }
+  .contact-card{
+    background:var(--panel); border:1px solid var(--border-solid); border-radius:var(--radius);
+    padding:18px 20px; display:flex; gap:14px; align-items:flex-start;
+    text-decoration:none; color:var(--text);
+    transition:border-color .15s ease;
+  }
+  .contact-card:hover, .contact-card:focus-visible{ border-color:var(--amber); }
+  .contact-card .ic{
+    width:34px; height:34px; border-radius:6px; background:var(--panel-alt);
+    display:flex; align-items:center; justify-content:center; flex-shrink:0;
+    color:var(--teal); font-family:var(--font-mono); font-size:14px;
+  }
+  .contact-card .k{ font-family:var(--font-mono); font-size:11px; color:var(--text-dim); text-transform:uppercase; letter-spacing:.06em; }
+  .contact-card .v{ margin-top:3px; font-size:14.5px; word-break:break-word; }
+
+  footer{
+    padding:32px 0; text-align:center;
+    font-family:var(--font-mono); font-size:12px; color:var(--text-faint);
+  }
+
+  /* scroll reveal */
+  .reveal{ opacity:0; transform:translateY(14px); transition:opacity .6s ease, transform .6s ease; }
+  .reveal.in{ opacity:1; transform:translateY(0); }
+  @media (prefers-reduced-motion: reduce){
+    .reveal{ opacity:1; transform:none; transition:none; }
+  }
+
+  :focus-visible{ outline:2px solid var(--amber); outline-offset:2px; }
+</style>
 </head>
+<body>
 
-<body class="is-preload">
+<nav>
+  <div class="wrap">
+    <div class="brand"><span class="dot"></span>thiago@carmo:~$</div>
+    <ul>
+      <li><a href="#experiencia">experiência</a></li>
+      <li><a href="#habilidades">habilidades</a></li>
+      <li><a href="#formacao">formação</a></li>
+      <li><a href="#projetos">projetos</a></li>
+      <li><a href="#contato">contato</a></li>
+    </ul>
+  </div>
+</nav>
 
-    <!-- Wrapper -->
-    <div id="wrapper" class="divided">
-
-        <!-- One -->
-        <section
-            class="banner style1 orient-left content-align-left image-position-right fullscreen onload-image-fade-in onload-content-fade-right">
-            <div class="content">
-                <h1>Thiago Carmo</h1>
-                <p class="major">Sou um profissional de TI com 6 anos de experiência em suporte técnico e infraestrutura, atuando com sistemas Microsoft, ERP e práticas ITIL. Tenho como objetivo consolidar minha carreira como Analista de Infraestrutura, contribuindo para ambientes tecnológicos estáveis, seguros e eficientes. Apaixonado por Linux e soluções open source, busco oportunidades que me permitam aprofundar conhecimentos em redes, servidores e cibersegurança, entregando resultados com visão analítica e foco em melhoria contínua.</p>
-                <ul class="actions stacked">
-                    <li><a href="#first" class="button big wide smooth-scroll-middle">Get Started</a></li>
-                </ul>
-            </div>
-            <div class="image">
-                <img src="images/banner.jpg" alt="" />
-            </div>
-        </section>
-
-        <!-- Two -->
-        <section class="spotlight style1 orient-right content-align-left image-position-center onscroll-image-fade-in"
-            id="first">
-            <div class="content">
-                <h2>Inovação</h2>
-                <p>Tenho 6 anos de experiência em TI e sou movido pela curiosidade em entender e otimizar infraestruturas complexas. Vejo o Linux não apenas como um sistema, mas como um ambiente de aprendizado contínuo que desperta meu interesse por automação, segurança e performance.</p>
-                <ul class="actions stacked">
-                    <!-- <li><a href="#" class="button">Learn More</a></li> -->
-                </ul>
-            </div>
-            <div class="image">
-                <img src="images/spotlight01.jpg" alt="" />
-            </div>
-        </section>
-
-        <!-- Three -->
-        <section class="spotlight style1 orient-left content-align-left image-position-center onscroll-image-fade-in">
-            <div class="content">
-                <h2>Linux</h2>
-                <p>Minha trajetória na tecnologia é marcada pela busca constante por estabilidade, eficiência e inovação. Apaixonado por Linux, acredito que dominar a infraestrutura é o primeiro passo para garantir ambientes mais seguros, ágeis e sustentáveis nas organizações.</p>
-                <ul class="actions stacked">
-                    <!-- <li><a href="#" class="button">Learn More</a></li> -->
-                </ul>
-            </div>
-            <div class="image">
-                <img src="images/spotlight02.jpg" alt="" />
-            </div>
-        </section>
-
-        <!-- Four -->
-        <section class="spotlight style1 orient-right content-align-left image-position-center onscroll-image-fade-in">
-            <div class="content">
-                <h2>Infra e Suporte</h2>
-                <p>Atuo com foco em infraestrutura e suporte, sempre buscando unir técnica e propósito. O universo Linux me inspira a ir além do básico — explorando novas ferramentas, aprimorando processos e contribuindo para equipes que valorizam o crescimento e a excelência operacional.</p>
-                <ul class="actions stacked">
-                    <!-- <li><a href="#" class="button">Learn More</a></li> -->
-                </ul>
-            </div>
-            <div class="image">
-                <img src="images/spotlight03.jpg" alt="" />
-            </div>
-        </section>
-
-        <!-- Five -->
-<section class="wrapper style1 align-center">
-            <div class="inner">
-                <h2>Em breve disponibilizarei alguns projetos aqui!!!</h2>
-                <!--<p>Explore nosso portfólio diversificado e mergulhe na criatividade de nossos projetos. Cada empreendimento é uma expressão única de inovação e habilidade, refletindo nosso compromisso em superar expectativas. Convidamos você a descobrir a excelência em cada detalhe - veja nossos projetos e inspire-se</p>-->
-            </div>
-
-            <!-- Gallery -->
-           <!-- <div class="gallery style2 medium lightbox onscroll-fade-in">
-                <article>
-                    <a href="images/gallery/fulls/01.png" class="image">
-                        <img src="images/gallery/thumbs/01.png" alt="" />
-                    </a>
-                    <div class="caption">
-                        <h3>The Art</h3>
-                        <p>Studio de art.</p>
-                        <ul class="actions fixed">
-                            <li><span class="button small">Detalhes</span></li>
-                        </ul>
-                    </div>
-                </article>
-                <article>
-                    <a href="images/gallery/fulls/02.png" class="image">
-                        <img src="images/gallery/thumbs/02.png" alt="" />
-                    </a>
-                    <div class="caption">
-                        <h3>The Art</h3>
-                        <p>Studio de art.</p>
-                        <ul class="actions fixed">
-                            <li><span class="button small">Detalhes</span></li>
-                        </ul>
-                    </div>
-                </article>
-                <article>
-                    <a href="images/gallery/fulls/03.png" class="image">
-                        <img src="images/gallery/thumbs/03.png" alt="" />
-                    </a>
-                    <div class="caption">
-                        <h3>VC Class</h3>
-                        <p>Escola.</p>
-                        <ul class="actions fixed">
-                            <li><span class="button small">Detalhes</span></li>
-                        </ul>
-                    </div>
-                </article>
-                <article>
-                    <a href="images/gallery/fulls/04.png" class="image">
-                        <img src="images/gallery/thumbs/04.png" alt="" />
-                    </a>
-                    <div class="caption">
-                        <h3>VC Classs</h3>
-                        <p>Escola.</p>
-                        <ul class="actions fixed">
-                            <li><span class="button small">Detalhes</span></li>
-                        </ul>
-                    </div>
-                </article>
-                <article>
-                    <a href="images/gallery/fulls/05.png" class="image">
-                        <img src="images/gallery/thumbs/05.png" alt="" />
-                    </a>
-                    <div class="caption">
-                        <h3>VC Class</h3>
-                        <p>Escola.</p>
-                        <ul class="actions fixed">
-                            <li><span class="button small">Detalhes</span></li>
-                        </ul>
-                    </div>
-                </article>
-                <article>
-                    <a href="images/gallery/fulls/06.png" class="image">
-                        <img src="images/gallery/thumbs/06.png" alt="" />
-                    </a>
-                    <div class="caption">
-                        <h3>Notre Cottage</h3>
-                        <p>Empresa de bolsas e artes feitas a mão.</p>
-                        <ul class="actions fixed">
-                            <li><span class="button small">Detalhes</span></li>
-                        </ul>
-                    </div>
-                </article>
-                <article>
-                    <a href="images/gallery/fulls/07.png" class="image">
-                        <img src="images/gallery/thumbs/07.png" alt="" />
-                    </a>
-                    <div class="caption">
-                        <h3>Fix Bug</h3>
-                        <p>Software House.</p>
-                        <ul class="actions fixed">
-                            <li><span class="button small">Detalhes</span></li>
-                        </ul>
-                    </div>
-                </article>
-                <article>
-                    <a href="images/gallery/fulls/08.png" class="image">
-                        <img src="images/gallery/thumbs/08.png" alt="" />
-                    </a>
-                    <div class="caption">
-                        <h3>Vitória Oliver</h3>
-                        <p>Ateliê de moda / griffe.</p>
-                        <ul class="actions fixed">
-                            <li><span class="button small">Detalhes</span></li>
-                        </ul>
-                    </div>
-                </article>
-                <article>
-                    <a href="images/gallery/fulls/09.png" class="image">
-                        <img src="images/gallery/thumbs/09.png" alt="" />
-                    </a>
-                    <div class="caption">
-                        <h3>Vitória Oliver</h3>
-                        <p>Ateliê de moda / griffe.</p>
-                        <ul class="actions fixed">
-                            <li><span class="button small">Detalhes</span></li>
-                        </ul>
-                    </div>
-                </article>
-                <article>
-                    <a href="images/gallery/fulls/10.png" class="image">
-                        <img src="images/gallery/thumbs/10.png" alt="" />
-                    </a>
-                    <div class="caption">
-                        <h3>Vitória Oliver</h3>
-                        <p>Ateliê de moda / griffe.</p>
-                        <ul class="actions fixed">
-                            <li><span class="button small">Detalhes</span></li>
-                        </ul>
-                    </div>
-                </article>
-                <article>
-                    <a href="images/gallery/fulls/11.png" class="image">
-                        <img src="images/gallery/thumbs/11.png" alt="" />
-                    </a>
-                    <div class="caption">
-                        <h3>Vitória Oliver</h3>
-                        <p>Ateliê de moda / griffe.</p>
-                        <ul class="actions fixed">
-                            <li><span class="button small">Detalhes</span></li>
-                        </ul>
-                    </div>
-                </article>
-                <article>
-                    <a href="images/gallery/fulls/12.png" class="image">
-                        <img src="images/gallery/thumbs/12.png" alt="" />
-                    </a>
-                    <div class="caption">
-                        <h3>Vitória Oliver</h3>
-                        <p>Ateliê de moda / griffe.</p>
-                        <ul class="actions fixed">
-                            <li><span class="button small">Detalhes</span></li>
-                        </ul>
-                    </div>
-                </article>
-            </div>
-
-        </section>-->      
-   
-        <!-- Six -->
-        <section class="wrapper style1 align-center">
-            <div class="inner">
-                <h2>Minhas habilidades e tecnologias</h2>
-                <p>Conheça um pouco sobre minhas hard skills, as tecnologias que tenho conhecimento.</p>
-                <div class="items style1 medium onscroll-fade-in">
-                    <section>
-                        <!-- <span class="icon style2 major fa-gem"></span> -->
-                        <h3>GLPI</h3>
-                        <p>O GLPI é uma poderosa plataforma de ITSM voltada para gestão de ativos, chamados e contratos. Ele permite centralizar o controle de TI, melhorar a comunicação entre equipes e garantir rastreabilidade nos atendimentos, seguindo boas práticas ITIL.</p>
-                    </section>
-                    <section>
-                        <!-- <span class="icon style2 major fa-gem"></span> -->
-                        <h3>Zabbix</h3>
-                        <p>O Zabbix é uma solução open source para monitoramento de infraestrutura e desempenho. Com ele, é possível acompanhar servidores, redes e aplicações em tempo real, garantindo disponibilidade e rápida identificação de falhas críticas.</p>
-                    </section>
-                    <section>
-                        <!-- <span class="icon style2 major fa-gem"></span> -->
-                        <h3>Grafana</h3>
-                        <p>O Grafana é uma ferramenta de observabilidade que transforma dados em painéis visuais dinâmicos. Integrado a diversas fontes, ele auxilia na análise de métricas, monitoramento de desempenho e tomada de decisões baseadas em dados.</p>
-                    </section>
-                    
-                </div>
-            </div>
-        </section>
-
-        <!-- Seven -->
-        <section class="wrapper style1 align-center">
-            <div class="inner medium">
-                <h2>Entre em contato</h2>
-                <form method="post" action="https://api.staticforms.xyz/submit">
-                    <div class="fields">
-                        <div class="field half">
-                            <label for="name">Nome</label>
-                            <input type="text" name="name" id="name" value="" />
-                        </div>
-                        <div class="field half">
-                            <label for="email">Email</label>
-                            <input type="email" name="email" id="email" value="" />
-                        </div>
-                        <div class="field">
-                            <label for="message">Menssagem</label>
-                            <textarea name="message" id="message" rows="6"></textarea>
-                        </div>
-                    </div>
-                    <ul class="actions special">
-                        <li><input type="submit" name="submit" id="submit" value="Envie a Menssagem" /></li>
-                    </ul>
-                    <input type="hidden" name="accessKey" value="8aa22198-712a-491d-9bb7-4a039e0e6beb">
-                    <input type="hidden" name="redirectTo" value="/index.html">
-                </form>
-
-            </div>
-        </section>
-
-        <!-- Footer -->
-        <footer class="wrapper style1 align-center">
-            <div class="inner">
-                <ul class="icons">
-                    <li><a href="https://www.instagram.com/carmo.thiago/" class="icon brands style2 fa-instagram"><span
-                                class="label">Instagram</span></a></li>
-                    <li><a href="https://www.linkedin.com/in/thiago-silva-carmo-9b46a412a/"
-                            class="icon brands style2 fa-linkedin-in"><span class="label">LinkedIn</span></a></li>
-                </ul>
-                <p>&copy; Thiago Silva Carmo.</p>
-            </div>
-        </footer>
-
+<!-- ============================================================
+     HERO
+     ============================================================ -->
+<header class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <div class="eyebrow"><span class="dot"></span>status: online</div>
+      <h1>Thiago Silva<br>Carmo</h1>
+      <div class="role">Analista de Infraestrutura de TI · Suporte, redes &amp; automação</div>
+      <p class="lede">Seis anos monitorando, mantendo e automatizando ambientes de TI — do atendimento ao usuário até o planejamento de infraestrutura de rede. Atualmente em busca de novos desafios e crescimento profissional.</p>
+      <div class="cta-row">
+        <a class="btn primary" href="mailto:thiago.carmo261@gmail.com">enviar e-mail</a>
+        <a class="btn" href="tel:+5512981026740">(12) 98102-6740</a>
+        <a class="btn" href="https://github.com/carmothiago" target="_blank" rel="noopener">github.com/carmothiago</a>
+      </div>
     </div>
 
-    <!-- Scripts -->
-    <script src="assets/js/jquery.min.js"></script>
-    <script src="assets/js/jquery.scrollex.min.js"></script>
-    <script src="assets/js/jquery.scrolly.min.js"></script>
-    <script src="assets/js/browser.min.js"></script>
-    <script src="assets/js/breakpoints.min.js"></script>
-    <script src="assets/js/util.js"></script>
-    <script src="assets/js/main.js"></script>
+    <div>
+      <div class="panel status-panel">
+        <div class="panel-head">
+          <div class="traffic"><span></span><span></span><span></span></div>
+          system_status.log
+        </div>
+        <div class="body">
+          <div class="status-row"><span class="k">host</span><span class="v">thiago-silva-carmo</span></div>
+          <div class="status-row"><span class="k">cargo</span><span class="v">analista_infraestrutura_jr</span></div>
+          <div class="status-row"><span class="k">localização</span><span class="v">pindamonhangaba, sp</span></div>
+          <div class="status-row"><span class="k">disponibilidade</span><span class="v ok">aberto a propostas</span></div>
+          <div class="status-row"><span class="k">tempo em produção</span><span class="v ok" id="uptime">--</span></div>
+        </div>
+      </div>
+
+      <!-- ============================================================
+           FOTO: troque o placeholder abaixo por sua imagem real.
+           Basta substituir o comentário por, por exemplo:
+           <img src="minha-foto.jpg" alt="Foto de Thiago Silva Carmo">
+           dentro da div "photo-slot".
+           ============================================================ -->
+      <div class="photo-frame">
+        <div class="photo-slot">
+          <img src="images/Image (1).jpg">
+          sua foto aqui
+        </div>
+        <div class="photo-meta">
+          <b>Thiago Silva Carmo</b>
+          Rua Imperatriz Leopoldina, 128<br>Santana — Pindamonhangaba
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- ============================================================
+     EXPERIÊNCIA
+     ============================================================ -->
+<section id="experiencia">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="index mono">// registro de atividades</div>
+      <h2>Experiência profissional</h2>
+      <p>Histórico em ordem cronológica, do mais recente ao mais antigo.</p>
+    </div>
+
+    <div class="log">
+      <div class="log-entry current reveal">
+        <div class="log-time">[ 2025 → atual ]<span class="badge">em produção</span></div>
+        <h3>Analista de Infraestrutura Júnior</h3>
+        <div class="company">Dexian</div>
+        <ul>
+          <li>Controle e manutenção de infraestrutura de TI</li>
+          <li>Suporte ao usuário</li>
+          <li>Manutenção de máquinas e usuários no Active Directory</li>
+          <li>Planejamento de infraestrutura de rede (Cisco)</li>
+          <li>Consultoria técnica ao cliente (Gerdau)</li>
+        </ul>
+      </div>
+
+      <div class="log-entry reveal">
+        <div class="log-time">[ 2022 → 2025 ]</div>
+        <h3>Analista de Service Desk N2</h3>
+        <div class="company">Erione</div>
+        <ul>
+          <li>Atendimento de Help Desk e Service Desk</li>
+          <li>Criação e manutenção de redes</li>
+          <li>Manutenção de servidores físicos e em nuvem</li>
+          <li>Suporte de sistemas, presencial e remoto</li>
+          <li>Manutenção de hardware e identificação de problemas</li>
+          <li>Automação de processos com integração e IA</li>
+          <li>Abertura e resolução de chamados via ServiceNow</li>
+        </ul>
+      </div>
+
+      <div class="log-entry reveal">
+        <div class="log-time">[ 2022 ]</div>
+        <h3>Field Service <span class="mono" style="color:var(--text-faint); font-size:12px;">(PJ)</span></h3>
+        <div class="company">Unisys</div>
+        <ul>
+          <li>Atendimento ao cliente e suporte à garantia</li>
+          <li>Atendimento a grandes clientes, como Dell e Ambev</li>
+          <li>Chamados de segundo nível</li>
+          <li>Manutenção de hardware de escritório e servidores</li>
+        </ul>
+      </div>
+
+      <div class="log-entry reveal">
+        <div class="log-time">[ 2022 ]</div>
+        <h3>Desenvolvedor Júnior Flutter</h3>
+        <div class="company">DBTec</div>
+        <ul>
+          <li>Desenvolvimento com Firebase</li>
+          <li>Versionamento de código com Git</li>
+        </ul>
+      </div>
+
+      <div class="log-entry reveal">
+        <div class="log-time">[ 2019 → 2022 ]</div>
+        <h3>Suporte de TI</h3>
+        <div class="company">A. A. Ferroviária</div>
+        <ul>
+          <li>Atendimento ao usuário</li>
+          <li>Manutenção de hardware e suporte a software</li>
+          <li>Manutenção de redes e infraestrutura de TI</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     HABILIDADES
+     ============================================================ -->
+<section id="habilidades">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="index mono">// serviços ativos</div>
+      <h2>Habilidades</h2>
+      <p>Ferramentas e tecnologias em uso no dia a dia.</p>
+    </div>
+
+    <div class="services-grid reveal">
+      <div class="service-card">
+        <h3><span class="dot"></span>infraestrutura &amp; operações</h3>
+        <ul class="skill-list">
+          <li><span class="dot"></span>ITIL <span class="stat">ativo</span></li>
+          <li><span class="dot"></span>Debian <span class="stat">ativo</span></li>
+          <li><span class="dot"></span>Zabbix <span class="stat">ativo</span></li>
+          <li><span class="dot"></span>Grafana <span class="stat">ativo</span></li>
+          <li><span class="dot"></span>Wazuh <span class="stat">ativo</span></li>
+        </ul>
+      </div>
+
+      <div class="service-card">
+        <h3><span class="dot amber"></span>desenvolvimento</h3>
+        <ul class="skill-list">
+          <li><span class="dot amber"></span>PHP 8+ <span class="stat">ativo</span></li>
+          <li><span class="dot amber"></span>JavaScript <span class="stat">ativo</span></li>
+          <li><span class="dot amber"></span>Python <span class="stat">ativo</span></li>
+        </ul>
+      </div>
+
+      <div class="service-card">
+        <h3><span class="dot"></span>dados &amp; banco de dados</h3>
+        <ul class="skill-list">
+          <li><span class="dot"></span>PL/SQL <span class="stat">ativo</span></li>
+          <li><span class="dot"></span>MySQL <span class="stat">ativo</span></li>
+          <li><span class="dot"></span>PostgreSQL <span class="stat">ativo</span></li>
+          <li><span class="dot"></span>NoSQL <span class="stat">ativo</span></li>
+          <li><span class="dot"></span>Firebase <span class="stat">ativo</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     FORMAÇÃO
+     ============================================================ -->
+<section id="formacao">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="index mono">// histórico acadêmico</div>
+      <h2>Formação</h2>
+    </div>
+    <div class="edu-grid reveal">
+      <div class="edu-card">
+        <div class="tag">cursando</div>
+        <h3>Tecnólogo em Banco de Dados</h3>
+        <p>Em andamento</p>
+      </div>
+      <div class="edu-card">
+        <div class="tag">concluído</div>
+        <h3>Técnico em Design</h3>
+        <p>SENAC Pindamonhangaba</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     PROJETOS
+     ============================================================
+     COMO ADICIONAR UM NOVO PROJETO:
+     1. Copie um bloco <div class="repo-card"> ... </div> inteiro.
+     2. Troque a imagem em .repo-image (adicione <img src="...">).
+     3. Atualize título, descrição, tags e o link do repositório.
+     4. Cole um trecho de código dentro de <pre class="repo-code">.
+     5. Cole o novo bloco ANTES do card com classe "placeholder"
+        (o card tracejado de "+ novo projeto"), para que ele
+        continue sendo o último da lista.
+     ============================================================ -->
+<section id="projetos">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="index mono">// repositórios</div>
+      <h2>Projetos</h2>
+      <p>Espaço para imagens, trechos de código e links dos próximos projetos. Os cards abaixo são exemplos — edite o HTML para adicionar os seus.</p>
+    </div>
+
+    <div class="repo-grid reveal">
+
+      <!-- Exemplo de card de projeto — edite ou duplique este bloco -->
+      <div class="repo-card">
+        <div class="repo-image">
+          <!-- <img src="projeto-01.png" alt="Captura de tela do projeto"> -->
+          imagem do projeto aqui (16:9)
+        </div>
+        <div class="repo-body">
+          <div class="repo-title-row">
+            <h3>nome-do-projeto</h3>
+            <a class="repo-link" href="#" target="_blank" rel="noopener">ver repo →</a>
+          </div>
+          <p class="repo-desc">Descreva em 1–2 frases o que o projeto faz e qual problema ele resolve.</p>
+          <div class="tag-row"><span>PHP</span><span>MySQL</span><span>Docker</span></div>
+          <pre class="repo-code"><span class="cmt">// cole um trecho de código representativo</span>
+<span class="kw">function</span> conectarBanco() {
+  <span class="kw">return</span> new PDO(<span class="cmt">"mysql:host=localhost"</span>);
+}</pre>
+        </div>
+      </div>
+
+      <!-- Segundo exemplo de card de projeto — edite ou duplique este bloco -->
+      <div class="repo-card">
+        <div class="repo-image">
+          <!-- <img src="projeto-02.png" alt="Captura de tela do projeto"> -->
+          imagem do projeto aqui (16:9)
+        </div>
+        <div class="repo-body">
+          <div class="repo-title-row">
+            <h3>painel-monitoramento</h3>
+            <a class="repo-link" href="#" target="_blank" rel="noopener">ver repo →</a>
+          </div>
+          <p class="repo-desc">Dashboard de status de serviços usando Zabbix e Grafana, com alertas automáticos.</p>
+          <div class="tag-row"><span>Python</span><span>Zabbix</span><span>Grafana</span></div>
+          <pre class="repo-code"><span class="cmt"># exemplo de script de coleta</span>
+<span class="kw">def</span> checar_status(host):
+    <span class="kw">return</span> zabbix_api.host.get(host=host)</pre>
+        </div>
+      </div>
+
+      <!-- Card "+ novo projeto": mantenha este por último como lembrete visual -->
+      <div class="repo-card placeholder">
+        <div class="inner">
+          <div class="plus">+</div>
+          <p>adicione seu próximo projeto duplicando um card acima</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     CONTATO
+     ============================================================ -->
+<section id="contato">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="index mono">// canais de contato</div>
+      <h2>Contato</h2>
+    </div>
+    <div class="contact-grid reveal">
+      <a class="contact-card" href="mailto:thiago.carmo261@gmail.com">
+        <div class="ic">@</div>
+        <div><div class="k">e-mail</div><div class="v">thiago.carmo261@gmail.com</div></div>
+      </a>
+      <a class="contact-card" href="tel:+5512981026740">
+        <div class="ic">☎</div>
+        <div><div class="k">telefone</div><div class="v">(12) 98102-6740</div></div>
+      </a>
+      <a class="contact-card" href="https://github.com/carmothiago" target="_blank" rel="noopener">
+        <div class="ic">&lt;/&gt;</div>
+        <div><div class="k">github</div><div class="v">github.com/carmothiago</div></div>
+      </a>
+      <div class="contact-card" style="cursor:default;">
+        <div class="ic">⌖</div>
+        <div><div class="k">endereço</div><div class="v">Rua Imperatriz Leopoldina, 128 — Santana, Pindamonhangaba</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  thiago@carmo:~$ <span style="color:var(--text-dim);">construído em HTML · CSS · JS</span>
+</footer>
+
+<script>
+  // Contador de "tempo em produção" — desde o início da carreira (A. A. Ferroviária, 2019)
+  (function(){
+    const start = new Date('2019-02-01T00:00:00');
+    const el = document.getElementById('uptime');
+    function tick(){
+      const diff = Date.now() - start.getTime();
+      const s = Math.floor(diff / 1000);
+      const days = Math.floor(s / 86400);
+      const hours = String(Math.floor((s % 86400) / 3600)).padStart(2,'0');
+      const mins = String(Math.floor((s % 3600) / 60)).padStart(2,'0');
+      const secs = String(s % 60).padStart(2,'0');
+      el.textContent = days + 'd ' + hours + ':' + mins + ':' + secs;
+    }
+    tick();
+    setInterval(tick, 1000);
+  })();
+
+  // Revelação suave ao rolar a página
+  (function(){
+    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const items = document.querySelectorAll('.reveal');
+    if (reduced || !('IntersectionObserver' in window)) {
+      items.forEach(el => el.classList.add('in'));
+      return;
+    }
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting){
+          entry.target.classList.add('in');
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    items.forEach(el => io.observe(el));
+  })();
+</script>
 
 </body>
-
 </html>
-
